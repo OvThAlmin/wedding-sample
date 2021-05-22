@@ -118,13 +118,13 @@ class UploadImg extends React.Component<P, S> {
     }
     await this.setState({ uploading: true })
     for (const obj of data) {
-      // const dlUrl = await this.getTumb(obj.fileName)
-      // if (!dlUrl) return
+      const dlUrl = await this.getTumb(obj.fileName)
+      if (!dlUrl) return
       await firestore
         .collection('images')
         .add({
-          original: obj.dlUrlOrigin, // required
-          thumbnail: obj.dlUrlOrigin, // required
+          original: dlUrl, // required
+          thumbnail: dlUrl, // required
           // 以下はdebugとかで見る用。必要はない
           org: obj.dlUrlOrigin,
           fileName: obj.fileName,
